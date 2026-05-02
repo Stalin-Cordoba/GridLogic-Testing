@@ -20,22 +20,25 @@ import androidx.compose.ui.unit.sp
 import com.example.gridlogicprototipo.ui.theme.DarkPurple
 
 @Composable
-fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
+fun Exercise3Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
     var opcionSeleccionada by remember { mutableStateOf<Int?>(null) }
 
+    // Fila 1: Cruz, Luna, Rayo
+    // Fila 2: Luna, Rayo, Cruz
+    // Fila 3: Rayo, Cruz, [Luna]
     val datosMatriz = listOf(
-        listOf(TipoFigura.CUADRADO, TipoFigura.CUADRADO, TipoFigura.CUADRADO),
-        listOf(TipoFigura.CIRCULO, TipoFigura.CIRCULO, TipoFigura.CIRCULO),
-        listOf(TipoFigura.TRIANGULO, TipoFigura.TRIANGULO, null)
+        listOf(TipoFigura.CRUZ, TipoFigura.LUNA, TipoFigura.RAYO),
+        listOf(TipoFigura.LUNA, TipoFigura.RAYO, TipoFigura.CRUZ),
+        listOf(TipoFigura.RAYO, TipoFigura.CRUZ, null)
     )
 
     val opciones = listOf(
-        DatosOpcion(1, TipoFigura.CUADRADO, "A"),
-        DatosOpcion(2, TipoFigura.CIRCULO, "B"),
-        DatosOpcion(3, TipoFigura.TRIANGULO, "C"), // Correcta
-        DatosOpcion(4, TipoFigura.ESTRELLA, "D"),
-        DatosOpcion(5, TipoFigura.DIAMANTE, "E"),
-        DatosOpcion(6, TipoFigura.HEXAGONO, "F")
+        DatosOpcion(1, TipoFigura.DIAMANTE, "A"),
+        DatosOpcion(2, TipoFigura.RAYO, "B"),
+        DatosOpcion(3, TipoFigura.LUNA, "C"), // Correcta
+        DatosOpcion(4, TipoFigura.HEXAGONO, "D"),
+        DatosOpcion(5, TipoFigura.CRUZ, "E"),
+        DatosOpcion(6, TipoFigura.ESTRELLA, "F")
     )
 
     Column(
@@ -47,7 +50,7 @@ fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = "Ejercicio 1",
+            text = "Ejercicio 3",
             fontSize = 24.sp,
             color = Color.White,
             fontWeight = FontWeight.Bold

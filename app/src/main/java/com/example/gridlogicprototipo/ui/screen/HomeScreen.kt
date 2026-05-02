@@ -27,8 +27,7 @@ import com.example.gridlogicprototipo.ui.theme.DarkBlue
 fun HomeScreen(onGoToExercise1: () -> Unit, modifier : Modifier){
 
     Column(modifier = Modifier.fillMaxSize().background(brush = verticalGradient(colors = listOf(DarkPurple,
-        Purple40
-    ))),
+        Purple40))),
         horizontalAlignment = Alignment.CenterHorizontally){
         Spacer(modifier = Modifier.height(50.dp))
 

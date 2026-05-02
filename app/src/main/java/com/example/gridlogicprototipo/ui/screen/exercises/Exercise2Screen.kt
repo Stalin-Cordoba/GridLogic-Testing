@@ -2,6 +2,7 @@ package com.example.gridlogicprototipo.ui.screen.exercises
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -20,19 +21,22 @@ import androidx.compose.ui.unit.sp
 import com.example.gridlogicprototipo.ui.theme.DarkPurple
 
 @Composable
-fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
+fun Exercise2Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
     var opcionSeleccionada by remember { mutableStateOf<Int?>(null) }
 
+    // Fila 1: Cuadrado, Círculo, Triángulo
+    // Fila 2: Círculo, Triángulo, Cuadrado
+    // Fila 3: Triángulo, Cuadrado, [Círculo]
     val datosMatriz = listOf(
-        listOf(TipoFigura.CUADRADO, TipoFigura.CUADRADO, TipoFigura.CUADRADO),
-        listOf(TipoFigura.CIRCULO, TipoFigura.CIRCULO, TipoFigura.CIRCULO),
-        listOf(TipoFigura.TRIANGULO, TipoFigura.TRIANGULO, null)
+        listOf(TipoFigura.CUADRADO, TipoFigura.CIRCULO, TipoFigura.TRIANGULO),
+        listOf(TipoFigura.CIRCULO, TipoFigura.TRIANGULO, TipoFigura.CUADRADO),
+        listOf(TipoFigura.TRIANGULO, TipoFigura.CUADRADO, null)
     )
 
     val opciones = listOf(
         DatosOpcion(1, TipoFigura.CUADRADO, "A"),
-        DatosOpcion(2, TipoFigura.CIRCULO, "B"),
-        DatosOpcion(3, TipoFigura.TRIANGULO, "C"), // Correcta
+        DatosOpcion(2, TipoFigura.CIRCULO, "B"), // Correcta
+        DatosOpcion(3, TipoFigura.TRIANGULO, "C"),
         DatosOpcion(4, TipoFigura.ESTRELLA, "D"),
         DatosOpcion(5, TipoFigura.DIAMANTE, "E"),
         DatosOpcion(6, TipoFigura.HEXAGONO, "F")
@@ -47,7 +51,7 @@ fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = "Ejercicio 1",
+            text = "Ejercicio 2",
             fontSize = 24.sp,
             color = Color.White,
             fontWeight = FontWeight.Bold
