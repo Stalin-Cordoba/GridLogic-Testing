@@ -25,22 +25,25 @@ import androidx.compose.ui.unit.sp
 import com.example.gridlogicprototipo.ui.theme.DarkPurple
 
 @Composable
-fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
+fun Exercise3Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
     var opcionSeleccionada by remember { mutableStateOf<Int?>(null) }
 
+    // Fila 1: Cruz, Luna, Rayo
+    // Fila 2: Luna, Rayo, Cruz
+    // Fila 3: Rayo, Cruz, [Luna]
     val datosMatriz = listOf(
-        listOf(Ex1Figura.CUADRADO, Ex1Figura.CUADRADO, Ex1Figura.CUADRADO),
-        listOf(Ex1Figura.CIRCULO, Ex1Figura.CIRCULO, Ex1Figura.CIRCULO),
-        listOf(Ex1Figura.TRIANGULO, Ex1Figura.TRIANGULO, null),
+        listOf(Ex3Figura.CRUZ, Ex3Figura.LUNA, Ex3Figura.RAYO),
+        listOf(Ex3Figura.LUNA, Ex3Figura.RAYO, Ex3Figura.CRUZ),
+        listOf(Ex3Figura.RAYO, Ex3Figura.CRUZ, null),
     )
 
     val opciones = listOf(
-        Ex1Opcion(1, Ex1Figura.CUADRADO, "A"),
-        Ex1Opcion(2, Ex1Figura.CIRCULO, "B"),
-        Ex1Opcion(3, Ex1Figura.TRIANGULO, "C"), // Correcta
-        Ex1Opcion(4, Ex1Figura.ESTRELLA, "D"),
-        Ex1Opcion(5, Ex1Figura.DIAMANTE, "E"),
-        Ex1Opcion(6, Ex1Figura.HEXAGONO, "F"),
+        Ex3Opcion(1, Ex3Figura.DIAMANTE, "A"),
+        Ex3Opcion(2, Ex3Figura.RAYO, "B"),
+        Ex3Opcion(3, Ex3Figura.LUNA, "C"), // Correcta
+        Ex3Opcion(4, Ex3Figura.HEXAGONO, "D"),
+        Ex3Opcion(5, Ex3Figura.CRUZ, "E"),
+        Ex3Opcion(6, Ex3Figura.ESTRELLA, "F"),
     )
 
     Column(
@@ -52,7 +55,7 @@ fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(40.dp))
 
         Text(
-            text = "Ejercicio 1",
+            text = "Ejercicio 3",
             fontSize = 24.sp,
             color = Color.White,
             fontWeight = FontWeight.Bold,
@@ -80,7 +83,7 @@ fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
                                 contentAlignment = Alignment.Center,
                             ) {
                                 if (figura != null) {
-                                    DibujarFigura1(
+                                    DibujarFigura3(
                                         tipoFigura = figura,
                                         modifier = Modifier.size(50.dp),
                                         color = Color(0xFF4A148C),
@@ -117,7 +120,7 @@ fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
         ) {
             items(opciones.size) { indice ->
                 val opcion = opciones[indice]
-                TarjetaOpcion1(
+                TarjetaOpcion3(
                     opcion = opcion,
                     estaSeleccionado = opcionSeleccionada == opcion.id,
                 ) {
@@ -129,19 +132,19 @@ fun Exercise1Screen(onNext: () -> Unit, modifier: Modifier = Modifier) {
     }
 }
 
-private enum class Ex1Figura {
+private enum class Ex3Figura {
     CUADRADO, CIRCULO, TRIANGULO, ESTRELLA, DIAMANTE, HEXAGONO, CRUZ, LUNA, RAYO
 }
 
-private data class Ex1Opcion(
+private data class Ex3Opcion(
     val id: Int,
-    val tipoFigura: Ex1Figura,
+    val tipoFigura: Ex3Figura,
     val etiqueta: String,
 )
 
 @Composable
-private fun DibujarFigura1(
-    tipoFigura: Ex1Figura,
+private fun DibujarFigura3(
+    tipoFigura: Ex3Figura,
     modifier: Modifier = Modifier,
     color: Color = Color.Black,
 ) {
@@ -150,17 +153,17 @@ private fun DibujarFigura1(
         val centro = Offset(this.size.width / 2f, this.size.height / 2f)
 
         when (tipoFigura) {
-            Ex1Figura.CUADRADO -> {
+            Ex3Figura.CUADRADO -> {
                 drawRect(
                     color = color,
                     topLeft = Offset(centro.x - (tamano / 2f), centro.y - (tamano / 2f)),
                     size = Size(tamano, tamano),
                 )
             }
-            Ex1Figura.CIRCULO -> {
+            Ex3Figura.CIRCULO -> {
                 drawCircle(color = color, radius = tamano / 2f, center = centro)
             }
-            Ex1Figura.TRIANGULO -> {
+            Ex3Figura.TRIANGULO -> {
                 val ruta = Path().apply {
                     moveTo(centro.x, centro.y - (tamano / 2f))
                     lineTo(centro.x - (tamano / 2f), centro.y + (tamano / 2f))
@@ -169,7 +172,7 @@ private fun DibujarFigura1(
                 }
                 drawPath(ruta, color)
             }
-            Ex1Figura.ESTRELLA -> {
+            Ex3Figura.ESTRELLA -> {
                 val ruta = Path().apply {
                     val radioExterior = tamano / 2f
                     val radioInterior = tamano / 5f
@@ -184,7 +187,7 @@ private fun DibujarFigura1(
                 }
                 drawPath(ruta, color)
             }
-            Ex1Figura.DIAMANTE -> {
+            Ex3Figura.DIAMANTE -> {
                 val ruta = Path().apply {
                     moveTo(centro.x, centro.y - (tamano / 2f))
                     lineTo(centro.x + (tamano / 2f), centro.y)
@@ -194,7 +197,7 @@ private fun DibujarFigura1(
                 }
                 drawPath(ruta, color)
             }
-            Ex1Figura.HEXAGONO -> {
+            Ex3Figura.HEXAGONO -> {
                 val ruta = Path().apply {
                     for (i in 0 until 6) {
                         val angulo = (Math.PI * i / 3.0).toFloat()
@@ -206,7 +209,7 @@ private fun DibujarFigura1(
                 }
                 drawPath(ruta, color)
             }
-            Ex1Figura.CRUZ -> {
+            Ex3Figura.CRUZ -> {
                 val anchoBarra = tamano / 3f
                 drawRect(
                     color = color,
@@ -219,11 +222,11 @@ private fun DibujarFigura1(
                     size = Size(tamano, anchoBarra),
                 )
             }
-            Ex1Figura.LUNA -> {
+            Ex3Figura.LUNA -> {
                 drawCircle(color = color, radius = tamano / 2f, center = centro)
                 drawCircle(color = Color.White, radius = tamano / 2.5f, center = Offset(centro.x + (tamano / 4f), centro.y - (tamano / 10f)))
             }
-            Ex1Figura.RAYO -> {
+            Ex3Figura.RAYO -> {
                 val ruta = Path().apply {
                     moveTo(centro.x + (tamano / 4f), centro.y - (tamano / 2f))
                     lineTo(centro.x - (tamano / 2f), centro.y + (tamano / 10f))
@@ -240,8 +243,8 @@ private fun DibujarFigura1(
 }
 
 @Composable
-private fun TarjetaOpcion1(
-    opcion: Ex1Opcion,
+private fun TarjetaOpcion3(
+    opcion: Ex3Opcion,
     estaSeleccionado: Boolean,
     alSeleccionar: () -> Unit,
 ) {
@@ -261,7 +264,7 @@ private fun TarjetaOpcion1(
             colors = CardDefaults.cardColors(containerColor = Color.White),
         ) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                DibujarFigura1(
+                DibujarFigura3(
                     tipoFigura = opcion.tipoFigura,
                     modifier = Modifier.size(35.dp),
                     color = Color(0xFF4A148C),

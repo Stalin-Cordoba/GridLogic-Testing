@@ -7,3 +7,9 @@ object Home
 
 @Serializable
 object Exercise1
+
+@Serializable
+object Exercise2
+
+@Serializable
+object Exercise3
